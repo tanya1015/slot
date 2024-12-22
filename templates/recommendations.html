@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рекомендации - BeautySlot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        /* Стили для рекомендаций */
+        .recommendations-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fdfdfd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .recommendations-container h2 {
+            color: #d18a99;
+            margin-bottom: 20px;
+        }
+
+        .recommendation {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff5f8;
+            border-left: 5px solid #d18a99;
+            border-radius: 5px;
+        }
+
+        .recommendation h3 {
+            margin-top: 0;
+            color: #c17488;
+        }
+
+        .recommendation p {
+            margin: 5px 0;
+            color: #333;
+        }
+
+        .recommendation .date {
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="logo">
+            <h1>BeautySlot</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="masters">Мастера</a></li>
+                <li><a href="reviews">Отзывы</a></li>
+                <li><a href="recommendations">Рекомендации</a></li>
+                <li><a href="price-list">Прайс-лист</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Содержимое страницы -->
+    <main>
+        <section class="recommendations-container">
+            <h2>Рекомендации по уходу за ногтями</h2>
+
+            {% for recommendation in recommendations %}
+            <div class="recommendation">
+                <h3>{{ recommendation.title }}</h3>
+                <p class="date">{{ recommendation.date.strftime('%d.%m.%Y') }}</p>
+                <p>{{ recommendation.content }}</p>
+            </div>
+            {% endfor %}
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2024 BeautySlot. Все права защищены.</p>
+    </footer>
+</body>
+</html>

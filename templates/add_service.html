@@ -1,0 +1,14 @@
+{% extends "admin_console.html" %}
+
+{% block title %}Добавление услуги{% endblock %}
+{% block mainTitle %}Добавление услуги{% endblock %}
+
+{% block mainContent %}
+<form action="/add_service" method="POST">
+    <div class="form-group">
+        <label for="name">Название услуги:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <button type="submit" class="submit-button">Добавить услугу</button>
+</form>
+{% endblock %}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы - BeautySlot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        /* Стили для отзывов */
+        .reviews-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fdfdfd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .review {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+
+        .review h3 {
+            margin: 0 0 5px 0;
+            color: #d18a99;
+        }
+
+        .review p {
+            margin: 5px 0;
+        }
+
+        .review-date {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .add-review-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #d18a99;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .add-review-btn:hover {
+            background-color: #c17488;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="logo">
+            <h1>BeautySlot</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Главная</a></li>
+                <li><a href="{{ url_for('masters') }}">Мастера</a></li>
+                <li><a href="{{ url_for('reviews') }}">Отзывы</a></li>
+                <li><a href="{{ url_for('recommendations') }}">Рекомендации</a></li>
+		        <li><a href="{{ url_for('price_list') }}">Прайс-лист</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Содержимое страницы -->
+    <main>
+        <section class="reviews-container">
+            <h2>Отзывы</h2>
+
+            {% for review in reviews %}
+            <div class="review">
+                <h3>{{ review.user }} о мастере {{ review.full_name }}</h3>
+                <p>{{ review.content }}</p>
+                <p class="review-date">Дата: {{ review.date.strftime('%d %B %Y') }}</p>
+            </div>
+            {% endfor %}
+
+            <a href="{{ url_for('add_review') }}" class="add-review-btn">Добавить отзыв</a>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2024 BeautySlot. Все права защищены.</p>
+    </footer>
+</body>
+</html>

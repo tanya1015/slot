@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить отзыв - BeautySlot</title>
+    <link rel="stylesheet" href = {{ url_for('static', filename = "css/styles.css") }}>
+    <style>
+        /* Стили для формы */
+        .review-form-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fdfdfd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .review-form-container h2 {
+            margin-top: 0;
+            color: #d18a99;
+        }
+
+        .review-form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        .review-form input,
+        .review-form textarea,
+        .review-form select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .review-form button {
+            background-color: #d18a99;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .review-form button:hover {
+            background-color: #c17488;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="logo">
+            <h1>BeautySlot</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="masters.html">Мастера</a></li>
+                <li><a href="reviews.html">Отзывы</a></li>
+               <li><a href="recommendations.html">Рекомендации</a></li>
+		<li><a href="price-list.html">Прайс-лист</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Форма добавления отзыва -->
+    <main>
+        <section class="review-form-container">
+            <h2>Добавить отзыв</h2>
+            <form class="review-form" action="/add_review" method="POST">
+                <label for="user">Ваше ФИО:</label>
+                <input type="text" id="user" name="user" placeholder="Введите ваше ФИО" required>
+
+                <label for="master_id">Выберите мастера:</label>
+                <select id="master_id" name="master_id" required>
+                    {% for master in masters %}
+                    <option value="{{ master.id }}">{{ master.full_name }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="content">Отзыв:</label>
+                <textarea id="content" name="content" rows="5" placeholder="Напишите ваш отзыв" required></textarea>
+
+                <button type="submit">Отправить отзыв</button>
+            </form>
+
+
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2024 BeautySlot. Все права защищены.</p>
+    </footer>
+</body>
+</html>

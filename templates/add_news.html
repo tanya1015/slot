@@ -1,0 +1,22 @@
+{% extends "admin_console.html" %}
+
+{% block title %}Добавление новости{% endblock %}
+{% block mainTitle %}Добавление новости{% endblock %}
+
+{% block mainContent %}
+<form action="/add_news" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="title">Название:</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+    <div class="form-group">
+        <label for="content">Текст новости:</label>
+        <textarea id="content" name="content" rows="5" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="image">Изображение (опционально):</label>
+        <input type="file" id="image" name="image" accept="image/*">
+    </div>
+    <button type="submit" class="submit-button">Добавить новость</button>
+</form>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "admin_console.html" %}
+
+{% block title %}Добавление мастера{% endblock %}
+{% block mainTitle %}Добавление мастера{% endblock %}
+
+{% block mainContent %}
+<form action="/add_master" method="POST">
+    <div class="form-group">
+        <label for="full_name">ФИО мастера:</label>
+        <input type="text" id="full_name" name="full_name" required>
+    </div>
+    <div class="form-group">
+        <label for="age">Возраст:</label>
+        <input type="number" id="age" name="age" required>
+    </div>
+    <div class="form-group">
+        <label for="experience">Стаж (в годах):</label>
+        <input type="number" id="experience" name="experience" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Описание:</label>
+        <textarea id="description" name="description" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="submit-button">Добавить мастера</button>
+</form>
+{% endblock %}

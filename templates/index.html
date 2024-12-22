@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная - BeautySlot</title>
+    <link rel="stylesheet"  href = {{ url_for('static', filename = "css/styles.css") }}>
+    <style>
+        /* Стили для карусели */
+        .carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-images img {
+            width: 100%;
+            flex-shrink: 0;
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 10px;
+            z-index: 10;
+        }
+        .carousel-button.prev { left: 10px; }
+        .carousel-button.next { right: 10px; }
+
+        /* Стили для новости */
+        .news {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fdfdfd;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .news h3 {
+            margin-top: 0;
+            color: #d18a99; /* Розоватый цвет */
+        }
+        .news p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="logo">
+            <h1>BeautySlot</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="masters">Мастера</a></li>
+                <li><a href="reviews">Отзывы</a></li>
+                <li><a href="recommendations">Рекомендации</a></li>
+		        <li><a href="price-list">Прайс-лист</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Карусель -->
+    <section class="carousel">
+        <button class="carousel-button prev">&lt;</button>
+        <div class="carousel-images">
+            <img src= {{ url_for('static', filename = "img/photo1.jpg") }} alt="Фото 1">
+            <img src= {{ url_for('static', filename = "img/photo2.jpg") }} alt="Фото 2">
+            <img src= {{ url_for('static', filename = "img/photo3.jpg") }} alt="Фото 3">
+        </div>
+        <button class="carousel-button next">&gt;</button>
+    </section>
+
+    <!-- Новости -->
+   <!-- Новости -->
+        <section class="news">
+            <h2>Новости</h2>
+            {% if news_list %}
+                {% for news in news_list %}
+                <article class="news-item">
+                    <h3>{{ news.title }}</h3>
+                    <p><em>{{ news.date.strftime('%d.%m.%Y') }}</em></p>
+                    {% if news.image_path %}
+                        <img src="{{ url_for('static', filename=news.image_path.split('static/')[-1]) }}" alt="Изображение новости" style="width: 100%; max-width: 400px; margin-bottom: 15px;">
+                    {% endif %}
+                    <p>{{ news.content }}</p>
+                </article>
+                <hr>
+                {% endfor %}
+            {% else %}
+                <p>Пока нет новостей.</p>
+            {% endif %}
+        </section>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2024 BeautySlot. Все права защищены.</p>
+    </footer>
+
+    <!-- Скрипт для карусели -->
+    <script>
+        const imagesContainer = document.querySelector('.carousel-images');
+        const prevButton = document.querySelector('.carousel-button.prev');
+        const nextButton = document.querySelector('.carousel-button.next');
+        let index = 0;
+
+        // Переключение к предыдущему слайду
+        prevButton.addEventListener('click', () => {
+            index = (index > 0) ? index - 1 : imagesContainer.children.length - 1;
+            updateCarousel();
+        });
+
+        // Переключение к следующему слайду
+        nextButton.addEventListener('click', () => {
+            index = (index < imagesContainer.children.length - 1) ? index + 1 : 0;
+            updateCarousel();
+        });
+
+        function updateCarousel() {
+            const offset = -index * 100; // Рассчитываем смещение
+            imagesContainer.style.transform = `translateX(${offset}%)`;
+        }
+    </script>
+</body>
+</html>

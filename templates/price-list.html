@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прайс-лист - BeautySlot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        /* Стили для прайс-листа */
+        .price-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fdfdfd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .price-container h2 {
+            color: #d18a99;
+            margin-bottom: 20px;
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .price-table th, .price-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .price-table th {
+            background-color: #f9e3e8;
+            color: #c17488;
+            text-transform: uppercase;
+        }
+
+        .price-table tr:nth-child(even) {
+            background-color: #fff5f8;
+        }
+
+        .price-table tr:hover {
+            background-color: #fceef2;
+        }
+
+        .price-table td {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="logo">
+            <h1>BeautySlot</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="masters">Мастера</a></li>
+                <li><a href="reviews">Отзывы</a></li>
+                <li><a href="recommendations">Рекомендации</a></li>
+                <li><a href="price-list">Прайс-лист</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Содержимое страницы -->
+    <main>
+        <section class="price-container">
+            <h2>Прайс-лист на услуги</h2>
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th>Услуга</th>
+                        <th>Цена (₽)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for price in prices %}
+                    <tr>
+                        <td>{{ price.service.name }}</td>
+                        <td>{{ price.price | round(2) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2024 BeautySlot. Все права защищены.</p>
+    </footer>
+</body>
+</html>

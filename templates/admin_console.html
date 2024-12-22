@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/admin_console.css') }}">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="logo">
+
+            <span>BeautySlot</span>
+        </div>
+    </header>
+
+    <!-- Меню -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+
+        </div>
+        <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/add_news">Добавить новость</a></li>
+            <li><a href="/add_master">Добавить мастера</a></li>
+            <li><a href="/add_schedule">Добавить расписание</a></li>
+            <li><a href="/add_service">Добавить услугу</a></li>
+            <li><a href="/add_price">Добавить цены</a></li>
+            <li><a href="/add_recommendation">Добавить рекомендацию</a></li>
+            <li><a href="/add_user">Добавить пользователя</a></li>
+        </ul>
+    </nav>
+
+    <!-- Контент страницы -->
+    <main>
+        <h1>{% block mainTitle %} {% endblock %}</h1>
+        <hr>
+        {% block mainContent %} {% endblock %}
+        <hr>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2024 BeautySlot.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

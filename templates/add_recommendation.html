@@ -1,0 +1,18 @@
+{% extends "admin_console.html" %}
+
+{% block title %}Добавление рекомендации{% endblock %}
+{% block mainTitle %}Добавление рекомендации{% endblock %}
+
+{% block mainContent %}
+<form action="/add_recommendation" method="POST">
+    <div class="form-group">
+        <label for="title">Название:</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+    <div class="form-group">
+        <label for="content">Текст рекомендации:</label>
+        <textarea id="content" name="content" rows="5" required></textarea>
+    </div>
+    <button type="submit" class="submit-button">Добавить рекомендацию</button>
+</form>
+{% endblock %}

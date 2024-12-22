@@ -1,0 +1,22 @@
+{% extends "admin_console.html" %}
+
+{% block title %}Добавление цены{% endblock %}
+{% block mainTitle %}Добавление цены{% endblock %}
+
+{% block mainContent %}
+<form action="/add_price" method="POST">
+    <div class="form-group">
+        <label for="service">Услуга:</label>
+        <select id="service" name="service" required>
+            {% for service in services %}
+            <option value="{{ service.id }}">{{ service.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="price">Цена (₽):</label>
+        <input type="number" id="price" name="price" required>
+    </div>
+    <button type="submit" class="submit-button">Добавить цену</button>
+</form>
+{% endblock %}

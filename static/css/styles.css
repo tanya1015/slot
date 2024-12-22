@@ -1,0 +1,129 @@
+/* Общие стили */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f8f6f4;
+}
+
+header {
+    background-color: #f8f1e9;
+    text-align: center;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header .logo h1 {
+    margin: 0;
+    color: #b58495;
+}
+
+nav ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #7a6c61;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #b58495;
+}
+
+/* Основной блок */
+.masters-page {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    min-height: calc(100vh - 100px);
+}
+
+/* Контейнер мастеров */
+.masters-container {
+    display: flex;
+    flex-direction: column; /* Расположим карточки вертикально */
+    align-items: center; /* Центруем карточки по горизонтали */
+    padding: 20px;
+}
+
+/* Карточка мастера */
+.master-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 60%; /* Ограничиваем ширину карточки */
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Добавим отступ между карточками */
+}
+
+.master-card h3 {
+    margin-top: 0;
+    color: #ff6699;
+}
+
+.master-card p {
+    margin: 5px 0;
+}
+
+.master-card h4 {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Таблица расписания */
+.schedule-table {
+    width: 100%; /* Таблица занимает всю ширину карточки */
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.schedule-table th,
+.schedule-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.schedule-table th {
+    background-color: #ffcccc;
+    color: #333;
+}
+
+/* Календарь */
+#calendar-container {
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 90%;
+}
+
+#calendar {
+    max-width: 900px;
+    margin: 0 auto;
+}
+/* Подвал */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f8f1e9;
+    color: #7a6c61;
+    font-size: 14px;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,0 +1,139 @@
+/* admin_console.css */
+
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f5f0; /* Бежевый фон */
+    color: #333; /* Тёмно-серый текст */
+}
+
+header {
+    background-color: #d3bfb0; /* Серо-бежевый */
+    color: #fff; /* Белый текст */
+    padding: 15px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+header .logo span {
+    color: #ef6f88; /* Розовый цвет */
+}
+
+#sidebar {
+    width: 250px;
+    background-color: #ece2dc; /* Светло-бежевый */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: 20px 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    margin: 15px 0;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    display: block;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+#sidebar ul li a:hover {
+    background-color: #ef6f88; /* Розовый фон при наведении */
+    color: #fff;
+}
+
+main {
+    margin-left: 270px;
+    padding: 20px;
+    background-color: #fff;
+    min-height: 100vh;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+main h1 {
+    font-size: 24px;
+    color: #ef6f88; /* Розовый цвет заголовков */
+    margin-bottom: 20px;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ece2dc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form .form-group {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="date"],
+form input[type="file"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form textarea {
+    resize: vertical;
+}
+
+form button.submit-button {
+    background-color: #ef6f88; /* Розовый */
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+form button.submit-button:hover {
+    background-color: #d35468; /* Более тёмный розовый */
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #ece2dc; /* Светло-бежевый */
+    color: #333;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мастера - BeautySlot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="logo">
+            <h1>BeautySlot</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/masters">Мастера</a></li>
+                <li><a href="/reviews">Отзывы</a></li>
+                <li><a href="/recommendations">Рекомендации</a></li>
+                <li><a href="/price-list">Прайс-лист</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <h2>Наши мастера</h2>
+
+        <div class="masters-container">
+            <!-- Карточка для каждого мастера -->
+            {% for master in masters %}
+            <div class="master-card">
+                <h3>{{ master.full_name }}</h3>
+                <p><strong>Возраст:</strong> {{ master.age }} лет</p>
+                <p><strong>Стаж:</strong> {{ master.experience }} лет</p>
+                <p>{{ master.description }}</p>
+
+                <!-- Расписание мастера -->
+                <h4>Расписание</h4>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>Комментарий</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for schedule in schedules %}
+                            {% if schedule.master_id == master.id %}
+                            <tr>
+                                <td>{{ schedule.date.strftime('%d.%m.%Y') }}</td>
+                                <td>{{ schedule.comment or '-' }}</td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Календарь -->
+        <div id="calendar-container">
+            <h3>Общий календарь</h3>
+            <div id="calendar"></div>
+            <div id="schedule-container"></div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2024 BeautySlot. Все права защищены.</p>
+    </footer>
+
+    <!-- Скрипт для FullCalendar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var scheduleContainer = document.getElementById('schedule-container'); // Контейнер для расписания
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth', // Начальный вид: Месяц
+                locale: 'ru',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek'
+                },
+                buttonText: {
+                    today: 'Сегодня',
+                    month: 'Месяц',
+                    week: 'Неделя'
+                },
+                dateClick: function(info) {
+                    var date = info.dateStr;
+
+                    // Отправляем AJAX-запрос на сервер
+                    fetch(`/get_schedule?date=${date}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.error) {
+                                scheduleContainer.innerHTML = `<p>Ошибка: ${data.error}</p>`;
+                                return;
+                            }
+
+                            // Выводим расписание
+                            let scheduleHTML = `
+                                <h3>Расписание на ${date}</h3>
+                                <table class="schedule-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Мастер</th>
+                                            <th>Описание</th>
+                                            <th>Статус</th>
+                                            <th>Комментарий</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${
+                                            data.map(item => `
+                                                <tr>
+                                                    <td>${item.master_name}</td>
+                                                    <td>${item.master_description}</td>
+                                                    <td>${item.status}</td>
+                                                    <td>${item.comment}</td>
+                                                </tr>
+                                            `).join('')
+                                        }
+                                    </tbody>
+                                </table>
+                            `;
+
+                            scheduleContainer.innerHTML = scheduleHTML;
+                        })
+                        .catch(error => {
+                            scheduleContainer.innerHTML = `<p>Ошибка загрузки данных: ${error.message}</p>`;
+                        });
+                }
+            });
+
+            calendar.render();
+        });
+    </script>
+</body>
+</html>
+
